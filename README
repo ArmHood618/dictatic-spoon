@@ -1,0 +1,22 @@
+Model & Controller kayanya dah kelar semua
+Controller1 buat view web
+Controller buat API
+Controller1 baru target ("sparepart belom")
+Route kayanya dah kelar semua
+Halaman baru mau bikin pegawai
+Rencana bikin seeder
+
+Target
+Pegawai --Done
+Supplier --Done
+Sales --Done
+Role --Done
+Sparepart --Done tinggal testing
+Cabang --Done
+Kendaraan --Done
+
+Remainder
+Konfirmasi password (Tambah, edit pegawai)
+Alert ubah Password (Edit Pegawai)
+Alert Delete (Semua)
+Alert apabila ada yang sama (nama, tipe, dll)
