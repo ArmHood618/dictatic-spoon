@@ -7,16 +7,15 @@ Halaman baru mau bikin pegawai
 Rencana bikin seeder
 
 Target
-Pegawai --Done
-Supplier --Done
-Sales --Done
-Role --Done
-Sparepart --Done tinggal testing
-Cabang --Done
-Kendaraan --Done
+SPK
+Transaksi
+Sparepart --blom bisa edit ma delete
+Pengadaan Sparepart
+Surat Pengadaan
+
 
 Remainder
 Konfirmasi password (Tambah, edit pegawai)
 Alert ubah Password (Edit Pegawai)
-Alert Delete (Semua)
+Alert Delete (Semua) --Done(?)
 Alert apabila ada yang sama (nama, tipe, dll)
