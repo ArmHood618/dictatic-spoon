@@ -22,7 +22,7 @@ class BuatTabelTransaksi extends Migration
             $table->string('nama');
             $table->string('no_telp');
             $table->string('no_plat');
-            $table->date('tanggal_keluar');
+            $table->date('tanggal_keluar')->nullable();
             $table->boolean('isLunas')->default(0);
             $table->boolean('isSelesai')->default(0);
             $table->foreign('id_motor')->references('id')->on('motor')->onDelete('cascade');

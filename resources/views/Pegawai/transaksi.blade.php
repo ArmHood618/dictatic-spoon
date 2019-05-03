@@ -63,12 +63,12 @@
     var arrJmlSparepart = new Array();
     arrHeadJasa = ['','Jenis', 'Harga', 'Jumlah'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
     arrHeadSparepart = ['', 'Nama', 'Harga', 'Jumlah'];
-    @foreach($detil_jasa as $data)
+    @foreach($semua_jasa as $data)
         var obj = {jenis:'{{ $data->jenis }}', id:{{ $data->id }}, harga:{{ $data->harga }}};
         arrJasa.push(obj);
     @endforeach
 
-    @foreach($detil_sparepart as $data)
+    @foreach($semua_sparepart as $data)
         var obj = {nama:'{{ $data->nama }}', id:{{ $data->id }}, harga:{{ $data->harga_jual }}};
         arrSparepart.push(obj);
     @endforeach
@@ -114,11 +114,15 @@
         for (var i = 1; i<rowCnt; i++){
             
             if(jasaTab.rows[i].cells[1].innerHTML.toString() == jasa.jenis){
+                var jml = document.getElementsByName('jumlah_jasa[]');
                 var tmp = 1 + parseInt(jasaTab.rows[i].cells[3].innerHTML);
                 jasaTab.rows[i].cells[3].innerHTML = tmp;
+                jml.value = tmp;
                 return;
             }
+
         }
+
         var tr = jasaTab.insertRow(rowCnt);      // TABLE ROW.
 
         for (var c = 0; c < arrHeadJasa.length; c++) {
@@ -135,9 +139,27 @@
                 button.setAttribute('class', 'btn btn-outline-dark my-2 my-sm-0');
 
                 // ADD THE BUTTON's 'onclick' EVENT.
-                button.setAttribute('onclick', 'removeRow(this)');
+                button.setAttribute('onclick', 'removeRowJasa(this)');
 
                 td.appendChild(button);
+
+                // ADD HIDDEN INPUT
+                var hidden = document.createElement('input');
+                //SET ATTRIBUTES
+                hidden.setAttribute('name', 'id_jasa[]');
+                hidden.setAttribute('type', 'hidden');
+                hidden.setAttribute('value', jasa.id);
+
+                td.appendChild(hidden);
+
+                // ADD HIDDEN INPUT
+                hidden = document.createElement('input');
+                //SET ATTRIBUTES
+                hidden.setAttribute('name', 'jumlah_jasa[]');
+                hidden.setAttribute('type', 'hidden');
+                hidden.setAttribute('value', '1');
+
+                td.appendChild(hidden);
             }
 
             if (c == 1) {
@@ -167,6 +189,8 @@
             if(sparepartTab.rows[i].cells[1].innerHTML.toString() == sparepart.nama){
                 var tmp = 1 + parseInt(sparepartTab.rows[i].cells[3].innerHTML);
                 sparepartTab.rows[i].cells[3].innerHTML = tmp;
+                var jml = document.getElementsByName('jumlah_sparepart[]');
+                jml.value = tmp;
                 return;
             }
         }
@@ -186,9 +210,27 @@
                 button.setAttribute('class', 'btn btn-outline-dark my-2 my-sm-0');
 
                 // ADD THE BUTTON's 'onclick' EVENT.
-                button.setAttribute('onclick', 'removeRow(this)');
+                button.setAttribute('onclick', 'removeRowSparepart(this)');
 
                 td.appendChild(button);
+
+                // ADD HIDDEN INPUT
+                var hidden = document.createElement('input');
+                //SET ATTRIBUTES
+                hidden.setAttribute('name', 'id_sparepart[]');
+                hidden.setAttribute('type', 'hidden');
+                hidden.setAttribute('value', sparepart.id);
+
+                td.appendChild(hidden);
+
+                // ADD HIDDEN INPUT
+                hidden = document.createElement('input');
+                //SET ATTRIBUTES
+                hidden.setAttribute('name', 'jumlah_sparepart[]');
+                hidden.setAttribute('type', 'hidden');
+                hidden.setAttribute('value', 1);
+
+                td.appendChild(hidden);
             }
 
             if (c == 1) {
@@ -207,27 +249,14 @@
 
 
     // DELETE TABLE ROW.
-    function removeRow(oButton) {
-        var empTab = document.getElementById('empTable');
+    function removeRowJasa(oButton) {
+        var empTab = document.getElementById('jasaTable');
         empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
     }
 
-    // EXTRACT AND SUBMIT TABLE DATA.
-    function submit() {
-        var myTab = document.getElementById('empTable');
-        var values = new Array();
-
-        // LOOP THROUGH EACH ROW OF THE TABLE.
-        for (row = 1; row < myTab.rows.length - 1; row++) {
-            for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
-
-                var element = myTab.rows.item(row).cells[c];
-                if (element.childNodes[0].getAttribute('type') == 'text') {
-                    values.push("'" + element.childNodes[0].value + "'");
-                }
-            }
-        }
-        console.log(values);
+    function removeRowSparepart(oButton) {
+        var empTab = document.getElementById('sparepartTable');
+        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
     }
 </script>
 </head>
@@ -294,7 +323,7 @@
 <!-- Navbar Logged - End -->
 
   <!-- Form - Start -->
-  {{ Form::open(array('route' => 'owner.transaksi.store', 'method'=>'POST')) }}
+  {{ Form::open(array('route' => 'owner.transaksi.store', 'method'=>'POST', 'id' => 'form')) }}
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

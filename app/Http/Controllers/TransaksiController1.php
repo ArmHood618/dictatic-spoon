@@ -34,10 +34,10 @@ class TransaksiController1 extends Controller
         $jasa = Jasa::pluck('jenis','id');
         $sparepart = Sparepart::pluck('nama','id');
         $motor = Motor::pluck('tipe','id');
-        $detil_jasa = Jasa::all();
-        $detil_sparepart = Sparepart::all();
+        $semua_jasa = Jasa::all();
+        $semua_sparepart = Sparepart::all();
 
-        return view('Pegawai.transaksi',compact('cabang','jasa','sparepart','motor','detil_jasa','detil_sparepart'));
+        return view('Pegawai.transaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart'));
     }
 
     /**
@@ -48,7 +48,44 @@ class TransaksiController1 extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ['id_cabang' => 'required','nama' => 'required','id_motor' => 'required','no_plat' => 'required','no_telp' => 'required','tanggal' => 'required']);
+        
+        $transaksi = new Transaksi;
+        $transaksi ->id_cabang = $request->id_cabang;
+        $transaksi ->id_motor = $request->id_motor;
+        $transaksi ->nama = $request->nama;
+        $transaksi ->no_plat = $request->no_plat;
+        $transaksi ->no_telp = $request->no_telp;
+        $transaksi ->tanggal = $request->tanggal;
+        if(!empty($request->id_jasa)){
+            $transaksi ->jenis_transaksi = 'SV';
+            if(!empty($request->id_sparepart)){
+                $transaksi ->jenis_transaksi = 'SS';
+            }
+        }else{
+            $transaksi ->jenis_transaksi = 'SP';
+        }
+        $transaksi->save();
+
+        if(!empty($request->id_jasa)){
+            foreach($request->id_jasa as $id_jasa){
+                $detil_jasa = new DetilJasa;
+                $detil_jasa->id_jasa = $id_jasa;
+                $detil_jasa->id_transaksi = $transaksi->id;
+                $detil_jasa->save();
+            }
+        }
+
+        if(!empty($request->id_sparepart)){
+            foreach($request->id_sparepart as $id_sparepart){
+                $detil_sparepart = new DetilSparepart;
+                $detil_sparepart->id_motor = $id_sparepart;
+                $detil_sparepart->id_transaksi = $transaksi->id;
+                $detil_sparepart->save();
+            }
+        }
+            
+        return redirect()->route('owner.transaksi.index')->with('success','Item created successfully');
     }
 
     /**
@@ -82,54 +119,7 @@ class TransaksiController1 extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Transaksi::find($id);
-
-        if(!is_null($request->id_motor)){
-            $data->id_motor = $request->id_motor;
-        }
         
-        if(!is_null($request->id_cabang)){
-            $data->id_cabang = $request->id_cabang;
-        }
-
-        if(!is_null($request->nama)){
-            $data->nama = $request->nama;
-        }
-
-        if(!is_null($request->id_jenis_transaksi)){
-            $data->id_jenis_transaksi = $request->id_jenis_transaksi;
-        }
-
-        if(!is_null($request->no_telp)){
-            $data->no_telp = $request->no_telp;
-        }
-
-        if(!is_null($request->no_plat)){
-            $data->no_plat = $request->no_plat;
-        }
-
-        if(!is_null($request->tanggal)){
-            $data->tanggal = $request->tanggal;
-        }
-
-        if(!is_null($request->tanggal_lunas)){
-            $data->tanggal_lunas = $request->tanggal_lunas;
-        }
-
-        if(!is_null($request->isLunas)){
-            $data->isLunas = $request->isLunas;
-        }
-
-        if(!is_null($request->isSelesai)){
-            $data->isSelesai = $request->isSelesai;
-        }
-
-        $success = $data->save();
-
-        if(!$success){
-            return response()->json('Error Updating', 500);
-        }else
-            return response()->json('Success',201);
     }
 
     /**
@@ -140,17 +130,6 @@ class TransaksiController1 extends Controller
      */
     public function destroy($id)
     {
-        $data = Transaksi::find($id);
-
-        if(is_null($data)){
-            return response()->json('Not Found',404);
-        }
-
-        $success = $data->delete();
-
-        if(!$success){
-            return response()->json('Error Deleting', 500);
-        }else
-            return response()->json('Success',201);
+        
     }
 }
