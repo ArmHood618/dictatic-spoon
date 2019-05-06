@@ -67,6 +67,7 @@ Route::prefix('owner')->group(function () {
     Route::resource('detil_jasa', 'DetilJasaController1',['as' => 'owner']);
     Route::resource('transaksi_pegawai', 'TransaksiPegawaiController1',['as' => 'owner']);
     Route::resource('detil_pengadaan', 'DetilPengadaanController1',['as' => 'owner']);
+    Route::get('/SPK/{id}', 'TransaksiController1@print')->name('owner.SPK');
 });
 
 Route::prefix('pegawai')->group(function(){
@@ -76,3 +77,6 @@ Route::prefix('pegawai')->group(function(){
 });
 
 Route::prefix('cs')->group(function(){});
+Route::get('/test', function(){
+    return view('PrintPreviews.SPK');
+});

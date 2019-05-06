@@ -81,75 +81,14 @@
 
 <ul class="list-unstyled components">
     <li>
-        <a href="#dataSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-book"></i><span> Data</span></a>
-        <ul class="collapse list-unstyled" id="dataSubmenu">
-            <li>
-                <a href="{{ route('owner.pegawai.index') }}">Pegawai</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.supplier.index') }}">Supplier</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.sales.index') }}">Sales</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.merek.index') }}">Merek</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.motor.index') }}">Motor</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.role.index') }}">Role</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.cabang.index') }}">Cabang</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.jasa.index') }}">Jasa</a>
-            </li>
-            <li>
-                <a href="{{ route('owner.sparepart.index') }}">Sparepart</a>
-            </li>
-        </ul>
-    </li>
-    <li>
       <a href="#transaksiSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-cash-register"></i><span> Transaksi</span></a>
         <ul class="collapse list-unstyled" id="transaksiSubmenu">
           <li>
-              <a href="{{ route('owner.transaksi.index') }}">Transaksi</a>
+              <a href="{{ route('owner.transaksi.create') }}">Transaksi</a>
           </li>
           <li>
-              <a href="#">Pengadaan Sparepart</a>
+              <a href="{{ route('owner.transaksi.index') }}">Pembayaran</a>
           </li>
-          <li>
-              <a href="#">Pembayaran</a>
-          </li>
-        </ul>
-    </li>
-    <li>
-        <a href="#laporanSubmenu" data-toggle="collapse" aria-expanded="false"><i class="far fa-chart-bar"></i><span> Laporan</span></a>
-        <ul class="collapse list-unstyled" id="laporanSubmenu">
-            <li>
-                <a href="#">Sparepart Terlaris</a>
-            </li>
-            <li>
-                <a href="#">Pendapatan Bulanan</a>
-            </li>
-            <li>
-                <a href="#">Pendapatan Tahunan</a>
-            </li>
-            <li>
-                <a href="#">Pengeluaran Bulanan</a>
-            </li>
-            <li>
-                <a href="#">Pengeluaran Tahunan</a>
-            </li>
-            <li>
-                <a href="#">Sisa Stok</a>
-            </li>
-            <li>
-                <a href="#">Penjualan Jasa</a>
-            </li>
         </ul>
     </li>
 </ul>
@@ -169,10 +108,10 @@
     <div class="navbar-collapse collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="{{ route('owner.index') }}">Beranda</a>
+          <a class="nav-link" href="{{ route('pegawai.index') }}">Beranda</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('logout.process') }}">Keluar</a>
+        <a class="nav-link" href="{{ route('logout.process') }}">Keluar</a>
         </li>
       </ul>
 
@@ -186,9 +125,8 @@
   </div>
 </nav>
 <!-- Navbar Logged - End -->
-
   <!-- Layout - Start -->
-  @yield('content')
+    @yield('content')
   <!-- Layout - End -->
 </body>
 </html>

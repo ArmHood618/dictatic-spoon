@@ -14,9 +14,13 @@ class RoleController1 extends Controller
      */
     public function index()
     {
-        $data = Role::all();
+        if(session()->get('role') == 'OW'){
+            $data = Role::all();
 
-        return view('Owner.tampilRole',compact('data'));
+            return view('Owner.tampilRole',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

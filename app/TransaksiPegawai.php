@@ -13,10 +13,10 @@ class TransaksiPegawai extends Model
                         'id_pegawai'];
 
     public function transaksi(){
-        return $this->belongsTo('App\transaksi','id_transaksi');
+        return $this->belongsToMany('App\transaksi','id_transaksi');
     }
 
     public function pegawai(){
-        return $this->belongsTo('App\Pegawai','id_pegawai');
+        return $this->belongsToMany('App\Pegawai','id_pegawai');
     }
 }

@@ -18,9 +18,13 @@ class SparepartController1 extends Controller
      */
     public function index()
     {
-        $data = Sparepart::all();
+        if(session()->get('role') == 'OW'){
+            $data = Sparepart::all();
 
-        return view('Owner.tampilSparepart',compact('data'));
+            return view('Owner.tampilSparepart',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

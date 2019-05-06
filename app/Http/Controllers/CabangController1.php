@@ -14,9 +14,13 @@ class CabangController1 extends Controller
      */
     public function index()
     {
-        $data = Cabang::all();
+        if(session()->get('role') == 'OW'){
+            $data = Cabang::all();
 
-        return view('Owner.tampilCabang',compact('data'));
+            return view('Owner.tampilCabang',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

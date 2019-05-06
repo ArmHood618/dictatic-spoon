@@ -14,9 +14,13 @@ class SupplierController1 extends Controller
      */
     public function index()
     {
-        $data = Supplier::all();
+        if(session()->get('role') == 'OW'){
+            $data = Supplier::all();
 
-        return view('Owner.tampilSupplier',compact('data'));
+            return view('Owner.tampilSupplier',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

@@ -14,9 +14,14 @@ class JasaController1 extends Controller
      */
     public function index()
     {
-        $data = Jasa::all();
+        
+        if(session()->get('role') == 'OW'){
+            $data = Jasa::all();
 
-        return view('Owner.tampilJasa',compact('data'));
+            return view('Owner.tampilJasa',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

@@ -15,9 +15,13 @@ class MotorController1 extends Controller
      */
     public function index()
     {
-        $data = Motor::all();
+        if(session()->get('role') == 'OW'){
+            $data = Motor::all();
 
-        return view('Owner.tampilMotor',compact('data'));
+            return view('Owner.tampilMotor',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

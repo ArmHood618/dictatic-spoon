@@ -14,9 +14,13 @@ class MerekController1 extends Controller
      */
     public function index()
     {
-        $data = Merek::all();
+        if(session()->get('role') == 'OW'){
+            $data = Merek::all();
 
-        return view('Owner.tampilMerek',compact('data'));
+            return view('Owner.tampilMerek',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

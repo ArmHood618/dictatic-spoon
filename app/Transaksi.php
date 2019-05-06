@@ -28,11 +28,15 @@ class Transaksi extends Model
         return $this->belongsTo('App\Motor','id_motor');
     }
 
-    public function detil_sparepart(){
-        return $this->hasMany('App\DetilSparepart','id_transaksi');
+    public function sparepart(){
+        return $this->belongsToMany('App\Sparepart','detil_sparepart','id_transaksi','id_sparepart')->withPivot('jumlah');
     }
 
-    public function detil_jasa(){
-        return $this->hasMany('App\DetilJasa','id_transaksi');
+    public function jasa(){
+        return $this->belongsToMany('App\Jasa','detil_jasa','id_transaksi','id_jasa')->withPivot('jumlah');
+    }
+
+    public function pegawai(){
+        return $this->belongsToMany('App\Pegawai','transaksi_pegawai','id_transaksi','id_pegawai');
     }
 }

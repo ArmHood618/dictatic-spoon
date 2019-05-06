@@ -12,7 +12,7 @@ class Jasa extends Model
     protected $fillable = ['jenis',
                         'harga'];
     
-    public function detil_jasa(){
-        return $this->hasMany('App\DetilJasa','id_jasa');
+    public function transaksi(){
+        return $this->belongsToMany('App\Transaksi','detil_jasa','id_jasa','id_transaksi')->withPivot('jumlah');
     }
 }

@@ -38,7 +38,7 @@ class Sparepart extends Model
         return $this->hasMany('App\SisaStok','id_sparepart');
     }
 
-    public function detil_sparepart(){
-        return $this->hasMany('App\DetiSparepart','id_sparepart');
+    public function transaksi(){
+        return $this->belongsToMany('App\Transaksi','detil_sparepart','id_sparepart','id_transaksi')->withPivot('jumlah');
     }
 }

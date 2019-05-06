@@ -27,7 +27,7 @@ class Pegawai extends Authenticatable
         return $this->belongsTo('App\Role','id_role');
     }
 
-    public function transaksi_pegawai(){
-        return $this->hasMany('App\TransaksiPegawai','id_pegawai');
+    public function transaksi(){
+        return $this->belongsToMany('App\Transaksi','transaksi_pegawai','id_pegawai','id_transaksi');
     }
 }

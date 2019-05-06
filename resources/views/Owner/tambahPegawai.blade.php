@@ -24,9 +24,19 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+            <table class="ml-auto">
+                <tr>
+                    <td>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <a href="{{ route('owner.pegawai.index') }}" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </td>
+            </table>
         </div>
       {{ Form::close() }}
       <!-- Form - End -->

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pengadaan;
+use App\DetilPengadaan;
+use App\Supplier;
+use App\Sparepart;
 
 class PengadaanController1 extends Controller
 {
@@ -15,8 +18,7 @@ class PengadaanController1 extends Controller
     public function index()
     {
         $data = Pengadaan::all();
-
-        return response()->json($data,200);
+        return view('Owner.tampilPengadaan');
     }
 
     /**
@@ -26,7 +28,9 @@ class PengadaanController1 extends Controller
      */
     public function create()
     {
-        //
+        $supplier = Supplier::pluck('nama','id');
+        $sparepart = Sparepart::pluck('nama','id');
+        return view('Owner.tambahPengadaan',compact('supplier'));
     }
 
     /**
@@ -40,12 +44,19 @@ class PengadaanController1 extends Controller
         $data = new Pengadaan;
         $data ->id_supplier = $request->id_supplier;
         $data ->tanggal = $request->tanggal;
-        $success = $data->save();
+        $data->save();
 
-        if(!$success){
-            return response()->json('Error Saving', 500);
-        }else
-            return response()->json('Success',201);
+        if(!empty($request->id_sparepart)){
+            for($i=0;$i<count($request->id_sparepart);$i++){
+                $detil_pengadaan = new DetilPengadaan;
+                $detil_pengadaan->id_sparepart = $request->id_sparepart[$i];
+                $detil_pengadaan->jumlah = $request->jumlah_sparepart[$i];
+                $detil_pengadaan->id_pengadaan = $data->id;
+                $detil_pengadaan->save();
+            }
+        }
+
+        return redirect()->route('owner.pengadaan.index')->with('success','Item created successfully');
     }
 
     /**

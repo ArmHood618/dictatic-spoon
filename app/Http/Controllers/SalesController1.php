@@ -15,9 +15,13 @@ class SalesController1 extends Controller
      */
     public function index()
     {
-        $data = Sales::all();
+        if(session()->get('role') == 'OW'){
+            $data = Sales::all();
 
-        return view('Owner.tampilSales',compact('data'));
+            return view('Owner.tampilSales',compact('data'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**

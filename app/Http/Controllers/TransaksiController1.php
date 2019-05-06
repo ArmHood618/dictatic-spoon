@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Transaksi;
+use App\TransaksiPegawai;
 use App\DetilSparepart;
 use App\DetilJasa;
 use App\Sparepart;
 use App\Jasa;
 use App\Cabang;
 use App\Motor;
+use App\Pegawai;
+use App\Role;
 
 class TransaksiController1 extends Controller
 {
@@ -20,7 +23,10 @@ class TransaksiController1 extends Controller
      */
     public function index()
     {
-        //
+        $data = Transaksi::all();
+        $transaksi_pegawai= TransaksiPegawai::all();    
+        $montir = Pegawai::where('role','MN');
+        return view('Pegawai.tampilTransaksi',compact('data','transaksi_pegawai','montir'));
     }
 
     /**
@@ -36,8 +42,9 @@ class TransaksiController1 extends Controller
         $motor = Motor::pluck('tipe','id');
         $semua_jasa = Jasa::all();
         $semua_sparepart = Sparepart::all();
+        $montir = Pegawai::where('id_role','MN')->pluck('nama','id');
 
-        return view('Pegawai.transaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart'));
+        return view('Pegawai.tambahTransaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart','montir'));
     }
 
     /**
@@ -68,22 +75,34 @@ class TransaksiController1 extends Controller
         $transaksi->save();
 
         if(!empty($request->id_jasa)){
-            foreach($request->id_jasa as $id_jasa){
+            for($i=0;$i<count($request->id_jasa);$i++){
                 $detil_jasa = new DetilJasa;
-                $detil_jasa->id_jasa = $id_jasa;
+                $detil_jasa->id_jasa = $request->id_jasa[$i];
+                $detil_jasa->jumlah = $request->jumlah_jasa[$i];
                 $detil_jasa->id_transaksi = $transaksi->id;
                 $detil_jasa->save();
             }
         }
 
         if(!empty($request->id_sparepart)){
-            foreach($request->id_sparepart as $id_sparepart){
+            for($i=0;$i<count($request->id_sparepart);$i++){
                 $detil_sparepart = new DetilSparepart;
-                $detil_sparepart->id_motor = $id_sparepart;
+                $detil_sparepart->id_sparepart = $request->id_sparepart[$i];
+                $detil_sparepart->jumlah = $request->jumlah_sparepart[$i];
                 $detil_sparepart->id_transaksi = $transaksi->id;
                 $detil_sparepart->save();
             }
         }
+
+        $transaksi_pegawai1 = new TransaksiPegawai;
+        $transaksi_pegawai1->id_pegawai = $request->id_pegawai;
+        $transaksi_pegawai1->id_transaksi = $transaksi->id;
+        $transaksi_pegawai1->save();
+
+        $transaksi_pegawai2 = new TransaksiPegawai;
+        $transaksi_pegawai2->id_pegawai = session()->get('id');
+        $transaksi_pegawai2->id_transaksi = $transaksi->id;
+        $transaksi_pegawai2->save();
             
         return redirect()->route('owner.transaksi.index')->with('success','Item created successfully');
     }
@@ -130,6 +149,17 @@ class TransaksiController1 extends Controller
      */
     public function destroy($id)
     {
-        
+        Transaksi::find($id)->delete();
+        return redirect()->route('owner.transaksi.index')->with('success','Item deleted successfully');
+    }
+
+    public function print($id)
+    {
+        $data = Transaksi::find($id);
+        $montir = $data->pegawai->where('id_role','MN')->first();
+        $pegawai = $data->pegawai->where('id_role','!=','MN')->first();
+        $sparepart = $data->sparepart;
+        $jasa = $data->jasa;
+        return view('PrintPreviews.SPK',compact('data','montir','pegawai','sparepart','jasa'));
     }
 }
