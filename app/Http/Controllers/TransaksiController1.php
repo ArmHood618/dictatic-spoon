@@ -23,10 +23,14 @@ class TransaksiController1 extends Controller
      */
     public function index()
     {
-        $data = Transaksi::all();
-        $transaksi_pegawai= TransaksiPegawai::all();    
-        $montir = Pegawai::where('role','MN');
-        return view('Pegawai.tampilTransaksi',compact('data','transaksi_pegawai','montir'));
+        if(session()->get('role') == 'OW'){
+            $data = Transaksi::all();
+            $transaksi_pegawai= TransaksiPegawai::all();    
+            $montir = Pegawai::where('role','MN');
+            return view('Owner.tampilTransaksi',compact('data','transaksi_pegawai','montir'));
+        }else{
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+        }
     }
 
     /**
@@ -44,7 +48,7 @@ class TransaksiController1 extends Controller
         $semua_sparepart = Sparepart::all();
         $montir = Pegawai::where('id_role','MN')->pluck('nama','id');
 
-        return view('Pegawai.tambahTransaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart','montir'));
+        return view('Owner.tambahTransaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart','montir'));
     }
 
     /**
@@ -150,7 +154,7 @@ class TransaksiController1 extends Controller
     public function destroy($id)
     {
         Transaksi::find($id)->delete();
-        return redirect()->route('owner.transaksi.index')->with('success','Item deleted successfully');
+        return redirect()->route('owner.transaksi.index')->with('alert','Item deleted successfully');
     }
 
     public function print($id)

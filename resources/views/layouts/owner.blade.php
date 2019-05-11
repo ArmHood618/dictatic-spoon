@@ -119,7 +119,7 @@
               <a href="{{ route('owner.transaksi.index') }}">Transaksi</a>
           </li>
           <li>
-              <a href="#">Pengadaan Sparepart</a>
+              <a href="{{ route('owner.pengadaan.index') }}">Pengadaan Sparepart</a>
           </li>
           <li>
               <a href="#">Pembayaran</a>
@@ -133,13 +133,13 @@
                 <a href="#">Sparepart Terlaris</a>
             </li>
             <li>
-                <a href="#">Pendapatan Bulanan</a>
+                <a href="{{ route('owner.pendapatan_bulanan') }}">Pendapatan Bulanan</a>
             </li>
             <li>
                 <a href="#">Pendapatan Tahunan</a>
             </li>
             <li>
-                <a href="#">Pengeluaran Bulanan</a>
+                <a href="{{ route('owner.pengeluaran_bulanan') }}">Pengeluaran Bulanan</a>
             </li>
             <li>
                 <a href="#">Pengeluaran Tahunan</a>

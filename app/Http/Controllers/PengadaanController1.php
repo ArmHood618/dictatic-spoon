@@ -18,7 +18,8 @@ class PengadaanController1 extends Controller
     public function index()
     {
         $data = Pengadaan::all();
-        return view('Owner.tampilPengadaan');
+        
+        return view('Owner.tampilPengadaan', compact('data','supplier'));
     }
 
     /**
@@ -29,8 +30,10 @@ class PengadaanController1 extends Controller
     public function create()
     {
         $supplier = Supplier::pluck('nama','id');
+        $semua_sparepart = Sparepart::all();
         $sparepart = Sparepart::pluck('nama','id');
-        return view('Owner.tambahPengadaan',compact('supplier'));
+
+        return view('Owner.tambahPengadaan',compact('supplier','sparepart','semua_sparepart'));
     }
 
     /**
@@ -41,6 +44,7 @@ class PengadaanController1 extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['tanggal' => 'required']);
         $data = new Pengadaan;
         $data ->id_supplier = $request->id_supplier;
         $data ->tanggal = $request->tanggal;
@@ -107,10 +111,17 @@ class PengadaanController1 extends Controller
 
         $success = $data->save();
 
-        if(!$success){
-            return response()->json('Error Updating', 500);
-        }else
-            return response()->json('Success',201);
+        if(!empty($request->id_sparepart)){
+            for($i=0;$i<count($request->id_sparepart);$i++){
+                $detil_pengadaan = new DetilPengadaan;
+                $detil_pengadaan->id_sparepart = $request->id_sparepart[$i];
+                $detil_pengadaan->jumlah = $request->jumlah_sparepart[$i];
+                $detil_pengadaan->id_pengadaan = $data->id;
+                $detil_pengadaan->save();
+            }
+        }
+
+        return redirect()->route('owner.pengadaan.index')->with('success','Item created successfully');
     }
 
     /**
@@ -123,15 +134,9 @@ class PengadaanController1 extends Controller
     {
         $data = Pengadaan::find($id);
 
-        if(is_null($data)){
-            return response()->json('Not Found',404);
-        }
-
         $success = $data->delete();
 
-        if(!$success){
-            return response()->json('Error Deleting', 500);
-        }else
-            return response()->json('Success',201);
+        return redirect()->route('owner.pengadaan.index')->with('success','Item created successfully');
+        
     }
 }

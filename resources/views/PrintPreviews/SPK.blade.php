@@ -48,8 +48,10 @@
     </thead>
     <tbody>
         @foreach($jasa as $j)
-        <td>{{ $j->jenis }}</td>
-        <td class="text-right">{{ $j->pivot->jumlah }}</td>
+        <tr>
+            <td>{{ $j->jenis }}</td>
+            <td class="text-right">{{ $j->pivot->jumlah }}</td>
+        </tr>
         @endforeach
     </tbody>
 </table>

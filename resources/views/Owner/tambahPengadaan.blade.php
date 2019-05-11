@@ -10,15 +10,16 @@
                     <strong>Tanggal Pesan :</strong>
                     {!! Form::date('tanggal',null,array('class' => 'form-control')) !!}
                 </div>
-            </div>
-            <div class="row">
+                <div class="row">
                     <div class="col-xs-12 col-md-6">
-                            <strong>Sparepart :</strong>
-                            {!! Form::select(null,$sparepart,null,array('id' => 'select_sparepart','class' => 'form-control')) !!}
-                            <button type="button" class="btn btn-primary" id="add_sparepart" onclick="addRowSparepart()">Tambah</button>
-                            <div id="cont_sparepart" class="table table-bordered"></div>
+                        <strong>Sparepart :</strong>
+                        {!! Form::select(null,$sparepart,null,array('id' => 'select_sparepart','class' => 'form-control')) !!}
+                        <button type="button" class="btn btn-primary" id="add_sparepart" onclick="addRowSparepart()">Tambah</button>
+                        <div id="cont_sparepart" class="table table-bordered"></div>
                     </div>
+                </div>
             </div>
+            
             <table class="ml-auto">
                 <tr>
                     <td>
@@ -42,13 +43,12 @@
         // ARRAY FOR HEADER.
         var arrHeadSparepart = new Array();
         var arrSparepart = new Array();
-        var arrJmlSparepart = new Array();
               // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
         arrHeadSparepart = ['', 'Nama', 'Harga', 'Jumlah'];
 
         @foreach($semua_sparepart as $data)
             var obj = {nama:'{{ $data->nama }}', id:{{ $data->id }}, harga:{{ $data->harga_jual }}};
-            arrSparepart.pus h(obj);
+            arrSparepart.push(obj);
         @endforeach
 
         // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
@@ -66,8 +66,6 @@
                 trS.appendChild(th);
             }
 
-            var div = document.getElementById('cont_jasa');
-            div.appendChild(jasaTable);    // ADD THE TABLE TO YOUR WEB PAGE.
             div = document.getElementById('cont_sparepart');
             div.appendChild(sparepartTable);
         }
@@ -86,7 +84,7 @@
                 if(sparepartTab.rows[i].cells[1].innerHTML.toString() == sparepart.nama){
                     var tmp = 1 + parseInt(sparepartTab.rows[i].cells[3].innerHTML);
                     sparepartTab.rows[i].cells[3].innerHTML = tmp;
-                    var jml = document.getElementsByName('jumlah_sparepart[]');
+                    var jml = document.getElementById('sparepart'+i);
                     jml.value = tmp;
                     return;
                 }
@@ -125,6 +123,7 @@
                     //SET ATTRIBUTES
                     hidden.setAttribute('name', 'jumlah_sparepart[]');
                     hidden.setAttribute('type', 'hidden');
+                    hidden.setAttribute('id', 'sparepart'+rowCnt);
                     hidden.setAttribute('value', 1);
 
                     td.appendChild(hidden);

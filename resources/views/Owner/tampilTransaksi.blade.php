@@ -1,4 +1,4 @@
-@extends('layouts.pegawai')
+@extends('layouts.owner')
 @section('content')
         <!-- Table - Start -->
         <table class="table table-bordered" style="width: 100%;">
@@ -22,7 +22,7 @@
                 @foreach($transaksi->pegawai as $t)
                     @foreach($montir as $m)
                         @if($t->id == $m->id)
-                        {{ $t->nama }}
+                        {{ $m->nama }}
                         @endif
                     @endforeach
                 @endforeach
