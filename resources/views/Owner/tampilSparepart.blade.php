@@ -32,7 +32,7 @@
                 <td><a class="btn btn-secondary" href="{{ route('owner.sparepart.edit', $spr->id) }}">Ubah</a>
                 {!! Form::open(['method' => 'Delete','route'
                                 => ['owner.sparepart.destroy', $spr->id],'style'=>'display:inline', 'id' => 'deleteForm']) !!}
-                <button type="button" class="btn btn-danger" onclick="deleteData()">Hapus</button>
+                <button type="button" class="btn btn-danger btn-delete">Hapus</button>
                 {!! Form::close() !!}
                 </td>
             </tr>
@@ -49,5 +49,9 @@
     </div>
     
   </div>
-  
+  <script>
+    document.querySelectorAll('.btn-delete').forEach(function(element) {
+      element.onclick = deleteData
+    })
+  </script>
 @endsection

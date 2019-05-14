@@ -30,8 +30,8 @@ class Sparepart extends Model
         return $this->hasMany('App\DetilPengadaan','id_sparepart');
     }
 
-    public function motor_sparepart(){
-        return $this->hasMany('App\MotorSparepart','id_sparepart');
+    public function motor(){
+        return $this->belongsToMany('App\Motor','motor_sparepart','id_sparepart','id_motor')->withPivot('id');
     }
 
     public function sisa_stok(){

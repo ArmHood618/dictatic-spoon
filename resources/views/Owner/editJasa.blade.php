@@ -6,9 +6,9 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Jenis Jasa:</strong>
-                    {!! Form::text('jenis',$data->jenis,array('placeholder' => 'Jenis','class' => 'form-control')) !!}
+                    {!! Form::text('jenis',$data->jenis,array('placeholder' => 'Jenis','class' => 'form-control','required' => 'required')) !!}
                     <strong>Harga Jasa:</strong>
-                    {!! Form::number('harga',$data->harga,array('placeholder' => 'Harga','class' => 'form-control')) !!}
+                    {!! Form::number('harga',$data->harga,array('placeholder' => 'Harga','class' => 'form-control','required' => 'required')) !!}
                 </div>
             </div>
 

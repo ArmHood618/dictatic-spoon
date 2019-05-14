@@ -8,7 +8,7 @@
                     <strong>Merek :</strong>
                     {!! Form::select('id_merek',$merek,$data->id_merek,array('class' => 'form-control')) !!}
                     <strong>Tipe :</strong>
-                    {!! Form::text('tipe',$data->tipe,array('placeholder' => 'Tipe','class' => 'form-control')) !!}
+                    {!! Form::text('tipe',$data->tipe,array('placeholder' => 'Tipe','class' => 'form-control','required' => 'required')) !!}
                 </div>
             </div>
 

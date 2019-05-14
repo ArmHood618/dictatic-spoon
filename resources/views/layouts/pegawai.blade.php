@@ -47,22 +47,7 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <script>
-  var msg = '{{Session::get('alert')}}';
-  var exist = '{{Session::has('alert')}}';
-  if(exist){
-    alert(msg);
-  }
-  {{ session()->forget('alert') }}
-
-  function deleteData(){
-    if(confirm('Apakah anda yakin ?')){
-      document.findElementById('deleteForm').submit();
-    }else{
-      return;
-    }
-  }
-  </script>
+  
 </head>
 <body onload="createTable()">
   <!-- Navbar Logged - Start -->
@@ -128,5 +113,23 @@
   <!-- Layout - Start -->
     @yield('content')
   <!-- Layout - End -->
+  <script>
+  var msg = '{{Session::get('alert')}}';
+  var exist = '{{Session::has('alert')}}';
+  if(exist){
+    alert(msg);
+  }
+  {{ session()->forget('alert') }}
+
+  function deleteData (event) {
+    let parent = event.target.parentNode
+    if(confirm('Apakah anda yakin ?')){
+      parent.method = "DELETE"
+      parent.submit()
+    }else{
+      return;
+    }
+  }
+  </script>
 </body>
 </html>

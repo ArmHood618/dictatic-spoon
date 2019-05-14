@@ -14,14 +14,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script>
-  var msg = '{{Session::get('alert')}}';
-  var exist = '{{Session::has('alert')}}';
-  if(exist){
-    alert(msg);
-  }
-  {{ session()->forget('alert') }}
-  </script>
+  
 </head>
 <body>
   <!-- Navbar - Start -->
@@ -103,5 +96,13 @@
     
   </div>
   <!-- Grid - End -->
+  <script>
+  var msg = '{{Session::get('alert')}}';
+  var exist = '{{Session::has('alert')}}';
+  if(exist){
+    alert(msg);
+  }
+  {{ session()->forget('alert') }}
+  </script>
 </body>
 </html>

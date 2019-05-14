@@ -6,13 +6,13 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Daerah :</strong>
-                    {!! Form::text('daerah',$data->daerah,array('placeholder' => 'Daerah','class' => 'form-control')) !!}
+                    {!! Form::text('daerah',$data->daerah,array('placeholder' => 'Daerah','class' => 'form-control','required' => 'required')) !!}
                     <strong>Alamat :</strong>
-                    {!! Form::text('alamat',$data->alamat,array('placeholder' => 'Alamat','class' => 'form-control')) !!}
+                    {!! Form::text('alamat',$data->alamat,array('placeholder' => 'Alamat','class' => 'form-control','required' => 'required')) !!}
                     <strong>Kota :</strong>
-                    {!! Form::text('kota',$data->kota,array('placeholder' => 'Kota','class' => 'form-control')) !!}
+                    {!! Form::text('kota',$data->kota,array('placeholder' => 'Kota','class' => 'form-control','required' => 'required')) !!}
                     <strong>Kode Pos :</strong>
-                    {!! Form::number('kode_pos',$data->kode_pos,array('placeholder' => 'Kode Pos','class' => 'form-control')) !!}
+                    {!! Form::number('kode_pos',$data->kode_pos,array('placeholder' => 'Kode Pos','class' => 'form-control','required' => 'required')) !!}
                 </div>
             </div>
 

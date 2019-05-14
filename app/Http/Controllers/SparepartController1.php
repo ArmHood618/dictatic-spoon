@@ -97,10 +97,10 @@ class SparepartController1 extends Controller
     {
         try{
             $data = Sparepart::find($id);
-            $motorsparepart = MotorSparepart::where('id_sparepart','=',$id)->get();
             $letak = Letak::pluck('letak','id');
             $ruang = Ruang::pluck('ruang','id');
             $motor = Motor::pluck('tipe','id');
+            $motorsparepart = $data->motor;
             $motorAll = Motor::all();
         } catch (ModelNotFoundException $e) {
             return back()->withError('alert',$e->getMessage());
@@ -127,7 +127,20 @@ class SparepartController1 extends Controller
         $sparepart ->harga_jual = $request->harga_jual;
         $sparepart->save();
 
-        $motorsparepart = MotorSparepart::where('id_sparepart','=',$id)->get();
+        if(!empty($request->add_id_motor)){
+            foreach($request->add_id_motor as $id_motor){
+                $motorsparepart = new MotorSparepart;
+                $motorsparepart->id_motor = $id_motor;
+                $motorsparepart->id_sparepart = $sparepart->id;
+                $motorsparepart->save();
+            }
+        }
+
+        if(!empty($request->delete_id_motor)){
+            foreach($request->delete_id_motor as $id_motor){
+                MotorSparepart::find($id_motor)->delete();
+            }
+        }
         
         return redirect()->route('owner.sparepart.index')->with('success','Item updated successfully');
     }

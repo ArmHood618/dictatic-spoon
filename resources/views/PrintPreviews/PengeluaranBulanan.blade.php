@@ -3,7 +3,7 @@
 <h3 class="text-center">LAPORAN PENGELUARAN BULANAN</h3>
 <p>Tahun : {{ $tahun }}</p>
 <br>
-<table class="table" id="idTable">
+<table class="table table-bordered" id="idTable">
     <thead>
         <th>No.</th>
         <th>Bulan</th>

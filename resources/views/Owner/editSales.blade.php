@@ -6,11 +6,11 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nama Sales :</strong>
-                    {!! Form::text('nama',$data->nama,array('placeholder' => 'Nama','class' => 'form-control')) !!}
+                    {!! Form::text('nama',$data->nama,array('placeholder' => 'Nama','class' => 'form-control','required' => 'required')) !!}
                     <strong>Supplier :</strong>
                     {!! Form::select('id_supplier',$supplier,$data->id_supplier,array('class' => 'form-control')) !!}
                     <strong>Nomor Telepon :</strong>
-                    {!! Form::number('no_telp',$data->no_telp,array('placeholder' => 'Nomor Telepon','class' => 'form-control')) !!}
+                    {!! Form::number('no_telp',$data->no_telp,array('placeholder' => 'Nomor Telepon','class' => 'form-control','required' => 'required')) !!}
                 </div>
             </div>
 

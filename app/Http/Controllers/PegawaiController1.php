@@ -126,12 +126,11 @@ class PegawaiController1 extends Controller
      */
     public function destroy($id)
     {
-        Pegawai::find($id)->delete();
+        Pegawai::findOrFail($id)->delete();
         return redirect()->route('owner.pegawai.index')->with('success','Item deleted successfully');
     }
 
     public function login(Request $request){
-
         $data = Pegawai::where([['username', '=', $request->username ],['password','=',$request->password]])->first();
         if(is_null($data)){
             return redirect()->route('login.view')->with(['alert' => 'Username atau password salah']);

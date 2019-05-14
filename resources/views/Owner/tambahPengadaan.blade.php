@@ -1,14 +1,14 @@
 @extends('layouts.owner')
 @section('content')
 <!-- Form - Start -->
-{{ Form::open(array('route' => 'owner.pengadaan.store', 'method'=>'POST')) }}
+{{ Form::open(array('route' => 'owner.pengadaan.store', 'method'=>'POST', 'id' => 'formid')) }}
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Supplier :</strong>
                     {!! Form::select('id_supplier',$supplier,null,array('class' => 'form-control')) !!}
                     <strong>Tanggal Pesan :</strong>
-                    {!! Form::date('tanggal',null,array('class' => 'form-control')) !!}
+                    {!! Form::date('tanggal',null,array('class' => 'form-control','required' => 'required')) !!}
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
@@ -29,7 +29,7 @@
                     </td>
                     <td>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" onclick="submitForm()" class="btn btn-primary">Submit</button>
                         </div>
                     </td>
             </table>
@@ -146,6 +146,15 @@
         function removeRowSparepart(oButton) {
             var empTab = document.getElementById('sparepartTable');
             empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+        }
+
+        'use strict'
+
+        document.querySelector('#formid').addEventListener('submit', function (event) {
+            if(document.getElementsByName('id_sparepart') === null){
+                event.preventDefault();
+                alert('Harus ada pemesanan sparepart');
+            }
         }
     </script>
 @endsection

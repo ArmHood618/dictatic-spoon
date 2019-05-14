@@ -20,7 +20,7 @@
                 <td><a class="btn btn-secondary" href="{{ route('owner.pengadaan.edit', $p->id) }}">Ubah</a>
                 {!! Form::open(['method' => 'Delete','route'
                                 => ['owner.pengadaan.destroy', $p->id],'style'=>'display:inline', 'id' => 'deleteForm']) !!}
-                <button type="button" class="btn btn-danger" onclick="deleteData()">Hapus</button>
+                <button type="button" class="btn btn-danger btn-delete">Hapus</button>
                 {!! Form::close() !!}
                 </td>
             </tr>
@@ -37,4 +37,9 @@
     </div>
     
   </div>
+  <script>
+    document.querySelectorAll('.btn-delete').forEach(function(element) {
+      element.onclick = deleteData
+    })
+  </script>
 @endsection

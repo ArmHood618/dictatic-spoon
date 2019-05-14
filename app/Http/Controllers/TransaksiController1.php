@@ -130,7 +130,19 @@ class TransaksiController1 extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Transaksi::find($id);
+        $cabang = Cabang::pluck('daerah','id');
+        $jasa = Jasa::pluck('jenis','id');
+        $sparepart = Sparepart::pluck('nama','id');
+        $motor = Motor::pluck('tipe','id');
+        $semua_jasa = Jasa::all();
+        $semua_sparepart = Sparepart::all();
+        $semua_montir = Pegawai::where('id_role','MN')->pluck('nama','id');
+        $montir = $data->pegawai->where('id_role','MN');
+        $detil_jasa = $data->jasa;
+        $detil_sparepart = $data->sparepart;
+
+        return view('Owner.editTransaksi',compact('data','cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart','montir','semua_montir','detil_jasa','detil_sparepart'));
     }
 
     /**
@@ -165,5 +177,22 @@ class TransaksiController1 extends Controller
         $sparepart = $data->sparepart;
         $jasa = $data->jasa;
         return view('PrintPreviews.SPK',compact('data','montir','pegawai','sparepart','jasa'));
+    }
+
+    public function pembayaran($id){
+        $jasa = Jasa::selectRaw(DB::raw('SUM(detil_jasa.jumlah * jasa.harga) as subtotal'))->whereRaw('id_transaksi = ?',[$id]);
+        $sparepart = Sparepart::selectRaw(DB::raw('SUM(detil_sparepart.jumlah * sparepart.harga_jual) as subtotal'))->whereRaw('id_transaksi = ?',[$id]);
+        $tanggal = date('Y-m-d');
+        $total = $jasa->subtotal + $sparepart->subtotal;
+
+        return view('Owner.pembayaranDetail',compact('jasa','sparepart','tanggal','total'));
+    }
+
+    public function pelunasan(Request $request, $id){
+        $data = Transaksi::find($id);
+        $data->isLunas = 1;
+
+        return view('Owner.pembayaran');
+        
     }
 }

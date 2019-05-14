@@ -68,15 +68,28 @@ Route::prefix('owner')->group(function () {
     Route::resource('transaksi_pegawai', 'TransaksiPegawaiController1',['as' => 'owner']);
     Route::resource('detil_pengadaan', 'DetilPengadaanController1',['as' => 'owner']);
     Route::get('/SPK/{id}', 'TransaksiController1@print')->name('owner.SPK');
+    //
     Route::get('/pendapatan_bulanan', function(){
         return view('Owner.pendapatanBulanan');
     })->name('owner.pendapatan_bulanan');
     Route::post('/pendapatan_bulanan', 'LaporanController@pendapatanBulanan')->name('owner.pendapatan_bulanan.create');
     Route::get('/pendapatan_bulanan/chart/{tahun}', 'ChartController@pendapatanBulanan')->name('owner.pendapatan_bulanan.graph');
+    //
     Route::get('/pengeluaran_bulanan', function(){
         return view('Owner.pengeluaranBulanan');
     })->name('owner.pengeluaran_bulanan');
     Route::post('/pengeluaran_bulanan', 'LaporanController@pengeluaranBulanan')->name('owner.pengeluaran_bulanan.create');
+    Route::get('/pengeluaran_bulanan/chart/{tahun}', 'ChartController@pengeluaranBulanan')->name('owner.pengeluaran_bulanan.graph');
+    //
+    Route::get('/pendapatan_tahunan', function(){
+        return view('Owner.pendapatanTahunan');
+    })->name('owner.pendapatan_tahunan');
+    Route::post('/pendapatan_tahunan', 'LaporanController@pendapatanTahunan')->name('owner.pendapatan_tahunan.create');
+    Route::get('/pendapatan_tahunan/chart/{tahun}', 'ChartController@pendapatanTahunan')->name('owner.pendapatan_tahunan.graph');
+    //
+    Route::get('/pembayaran', function(){
+        return view('Owner.pembayaran');
+    })->name('owner.pembayaran');
     
 });
 

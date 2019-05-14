@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Tahun Laporan yang akan dibuat :</strong>
-                    {!! Form::text('tanggal',null,array('placeholder' => 'Tahun','class' => 'form-control', 'id' => 'tanggal')) !!}
+                    {!! Form::text('tahun',null,array('placeholder' => 'Tahun','class' => 'form-control', 'id' => 'tanggal','required' => 'required')) !!}
                 </div>
             </div>
 
@@ -14,7 +14,7 @@
                 <tr>
                     <td>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Graph</button>
                         </div>
                     </td>
                     <td>

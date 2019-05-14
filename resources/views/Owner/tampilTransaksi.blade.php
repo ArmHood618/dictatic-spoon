@@ -30,7 +30,7 @@
                 <td><a class="btn btn-secondary" href="{{ route('owner.transaksi.edit', $transaksi->id) }}">Ubah</a>
                 {!! Form::open(['method' => 'Delete','route'
                                 => ['owner.transaksi.destroy', $transaksi->id],'style'=>'display:inline', 'id' => 'deleteForm']) !!}
-                <button type="button" class="btn btn-danger" onclick="deleteData()">Hapus</button>
+                <button type="button" class="btn btn-danger btn-delete">Hapus</button>
                 {!! Form::close() !!}
                 <button type="button" class="btn btn-primary btnprn" onclick="frames['frame{{ $transaksi->id }}'].print()">Cetak</a>
                 <iframe src="{{ route('owner.SPK', $transaksi->id) }}" style="visibility:hidden; height:1px; width:1px;" name="frame{{ $transaksi->id }}"></iframe>
@@ -54,4 +54,9 @@
     </div>
     
   </div>
+  <script>
+    document.querySelectorAll('.btn-delete').forEach(function(element) {
+      element.onclick = deleteData
+    })
+  </script>
 @endsection

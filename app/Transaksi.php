@@ -37,6 +37,6 @@ class Transaksi extends Model
     }
 
     public function pegawai(){
-        return $this->belongsToMany('App\Pegawai','transaksi_pegawai','id_transaksi','id_pegawai');
+        return $this->belongsToMany('App\Pegawai','transaksi_pegawai','id_transaksi','id_pegawai')->withPivot('id');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.owner')
 @section('content')
 <!-- Form - Start -->
-{{ Form::open(array('route' => 'owner.pendapatan_bulanan.create', 'method'=>'POST')) }}
+{{ Form::open(array('route' => 'owner.pendapatan_tahunan.create', 'method'=>'POST')) }}
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

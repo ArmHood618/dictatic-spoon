@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Merek Motor:</strong>
-                    {!! Form::text('merek',$data->merek,array('placeholder' => 'Merek','class' => 'form-control')) !!}
+                    {!! Form::text('merek',$data->merek,array('placeholder' => 'Merek','class' => 'form-control','required' => 'required')) !!}
                 </div>
             </div>
 
