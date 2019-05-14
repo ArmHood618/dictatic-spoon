@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Tahun Laporan yang akan dibuat :</strong>
-                    {!! Form::text('tahun',null,array('placeholder' => 'Tahun','class' => 'form-control', 'id' => 'tanggal','required' => 'required')) !!}
+                    {!! Form::number('tahun',null,array('placeholder' => 'Tahun','class' => 'form-control', 'id' => 'tanggal','required' => 'required')) !!}
                 </div>
             </div>
 

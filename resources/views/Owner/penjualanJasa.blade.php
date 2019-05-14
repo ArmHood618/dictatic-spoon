@@ -1,12 +1,14 @@
 @extends('layouts.owner')
 @section('content')
 <!-- Form - Start -->
-{{ Form::open(array('route' => 'owner.pendapatan_bulanan.create', 'method'=>'POST')) }}
+{{ Form::open(array('route' => 'owner.penjualan_jasa.create', 'method'=>'POST')) }}
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Tahun Laporan yang akan dibuat :</strong>
                     {!! Form::number('tahun',null,array('placeholder' => 'Tahun','class' => 'form-control','required' => 'required')) !!}
+                    <strong>Bulan Laporan yang akan dibuat(angka) :</strong>
+                    {!! Form::number('bulan',null,array('placeholder' => 'Bulan','class' => 'form-control','required' => 'required')) !!}
                 </div>
             </div>
 

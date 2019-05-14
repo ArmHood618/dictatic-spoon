@@ -115,25 +115,22 @@
         <a href="#laporanSubmenu" data-toggle="collapse" aria-expanded="false"><i class="far fa-chart-bar"></i><span> Laporan</span></a>
         <ul class="collapse list-unstyled" id="laporanSubmenu">
             <li>
-                <a href="#">Sparepart Terlaris</a>
+                <a href="{{ route('owner.sparepart_terlaris') }}">Sparepart Terlaris</a>
             </li>
             <li>
                 <a href="{{ route('owner.pendapatan_bulanan') }}">Pendapatan Bulanan</a>
             </li>
             <li>
-                <a href="#">Pendapatan Tahunan</a>
+                <a href="{{ route('owner.pendapatan_tahunan') }}">Pendapatan Tahunan</a>
             </li>
             <li>
                 <a href="{{ route('owner.pengeluaran_bulanan') }}">Pengeluaran Bulanan</a>
             </li>
             <li>
-                <a href="#">Pengeluaran Tahunan</a>
-            </li>
-            <li>
                 <a href="#">Sisa Stok</a>
             </li>
             <li>
-                <a href="#">Penjualan Jasa</a>
+                <a href="{{ route('owner.penjualan_jasa') }}">Penjualan Jasa</a>
             </li>
         </ul>
     </li>

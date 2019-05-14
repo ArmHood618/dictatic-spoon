@@ -87,6 +87,17 @@ Route::prefix('owner')->group(function () {
     Route::post('/pendapatan_tahunan', 'LaporanController@pendapatanTahunan')->name('owner.pendapatan_tahunan.create');
     Route::get('/pendapatan_tahunan/chart/{tahun}', 'ChartController@pendapatanTahunan')->name('owner.pendapatan_tahunan.graph');
     //
+    Route::get('/penjualan_jasa', function(){
+        return view('Owner.penjualanJasa');
+    })->name('owner.penjualan_jasa');
+    Route::post('/penjualan_jasa', 'LaporanController@penjualanJasa')->name('owner.penjualan_jasa.create');
+    //
+    Route::get('/sparepart_terlaris', function(){
+        return view('Owner.sparepartTerlaris');
+    })->name('owner.sparepart_terlaris');
+    Route::post('/sparepart_terlaris', 'LaporanController@sparepartTerlaris')->name('owner.sparepart_terlaris.create');
+    Route::get('/sparepart_terlaris/chart/{tahun}', 'ChartController@sparepartTerlaris')->name('owner.sparepart_terlaris.graph');
+    //
     Route::get('/pembayaran', function(){
         return view('Owner.pembayaran');
     })->name('owner.pembayaran');
