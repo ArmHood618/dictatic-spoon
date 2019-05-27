@@ -20,7 +20,7 @@
   <!-- Navbar - Start -->
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#1277e1">
     <a class="navbar-brand">
-    <img src="/image/icon.png" width="30" height="30" alt="Image not Found">
+    <img src="{{ asset('/image/icon.png') }}" width="30" height="30" alt="Image not Found">
       AtmaAuto
     </a>
     <div class="navbar-collapse collapse">
@@ -48,7 +48,7 @@
 
     <div class="col-sm-0 mr-3">
       <div class="card my-3" style="width: 18rem;">
-        <img src="/image/imagenotfound.png" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
+        <img src="{{ asset('/image/imagenotfound.png') }}" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
         <div class="card-body">
           <h5 class="card-title">Sample Grid</h5>
           <p class="card-text">Some quick example text.</p>
@@ -59,7 +59,7 @@
     <!-- Divider -->
     <div class="col-sm-0 mr-3">
       <div class="card my-3" style="width: 18rem;">
-        <img src="/image/imagenotfound.png" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
+        <img src="{{ asset('/image/imagenotfound.png') }}" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
         <div class="card-body">
           <h5 class="card-title">Sample Grid</h5>
           <p class="card-text">Some quick example text.</p>
@@ -74,7 +74,7 @@
 
     <div class="col-sm-0 mr-3">
       <div class="card my-3" style="width: 18rem;">
-        <img src="/image/imagenotfound.png" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
+        <img src="{{ asset('/image/imagenotfound.png') }}" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
         <div class="card-body">
           <h5 class="card-title">Sample Grid</h5>
           <p class="card-text">Some quick example text.</p>
@@ -85,7 +85,7 @@
     <!-- Divider -->
     <div class="col-sm-0 mr-3">
       <div class="card my-3" style="width: 18rem;">
-        <img src="/image/imagenotfound.png" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
+        <img src="{{ asset('/image/imagenotfound.png') }}" class="card-img-top" style="width: 18rem;height: 18rem;" alt="/image/imagenotfound.png">
         <div class="card-body">
           <h5 class="card-title">Sample Grid</h5>
           <p class="card-text">Some quick example text.</p>

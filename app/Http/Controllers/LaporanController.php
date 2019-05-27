@@ -120,7 +120,7 @@ DATA;
             FROM pengadaan
                 LEFT JOIN detil_pengadaan ON pengadaan.id = detil_pengadaan.id_pengadaan
                 LEFT JOIN sparepart ON detil_pengadaan.id_sparepart = sparepart.id
-            WHERE YEAR(pengadaan.tanggal) = :year
+            WHERE YEAR(pengadaan.tanggal) = :year AND pengadaan.isConfirmed =  1
             GROUP BY pengadaan.id
         ) t
         GROUP BY t.bulan
@@ -129,7 +129,7 @@ DATA;
         $semua = DB::select( DB::raw($query), array(
             'year' => $request->tahun,
         ));
-        $tahun = $request->tanggal;
+        $tahun = $request->tahun;
         foreach($semua as $s){
             $all[$s->bulan - 1] = $s;
         }
@@ -205,5 +205,14 @@ DATA;
             $all[$s->bulan - 1] = $s;
         }
         return view('PrintPreviews.SparepartTerlaris',compact('all','tahun'));
+    }
+
+    public function sisaStokInput(){
+        $sparepart = App\Sparepart::pluck('nama','id');
+        return view('Owner.sisaStok',compact('sparepart'));
+    }
+
+    public function sisaStok(Request $request){
+        $semua = App\DetilSparepart::join('')->whereRaw('id_sparepart = ? AND ');
     }
 }

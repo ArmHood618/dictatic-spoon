@@ -2,7 +2,7 @@
 @section('content')
       <!-- Table - Start -->
       <table class="table table-bordered" style="width: 100%;">
-      @if(count($data))
+      @if($data->count())
           <thead class="thead-dark text-center">
             <tr>
                 <td class="col" style="width: 5%;">ID</td>
@@ -10,10 +10,10 @@
                 <td class="col" style="width: 10%;">Tipe</td>
                 <td class="col" style="width: 10%;">Letak</td>
                 <td class="col" style="width: 10%;">Ruang</td>
-                <td class="col" style="width: 10%;">Stok</td>
+                <td class="col" style="width: 10%;">@sortablelink('stok','Stok')</td>
                 <td class="col" style="width: 10%;">Stok Minimal</td>
-                <td class="col" style="width: 10%;">Harga Beli</td>
-                <td class="col" style="width: 10%;">Harga Jual</td>
+                <td class="col" style="width: 10%;">@sortablelink('harga_beli','Harga Beli')</td>
+                <td class="col" style="width: 10%;">@sortablelink('harga_jual','Harga Jual')</td>
                 <td class="col" style="width: 15%;">Aksi</td>
             </tr>
           </thead>
@@ -45,6 +45,7 @@
           </tbody>
       </table>
       <!-- Table - End -->
+      {!! $data->appends(request()->except('page'))->render() !!}
       <a class="btn btn-outline-dark my-2 my-sm-0" href="{{ route('owner.sparepart.create') }}"><i class="fas fa-plus"></i><span> Tambah Sparepart</span></a>
     </div>
     

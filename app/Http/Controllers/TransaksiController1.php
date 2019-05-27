@@ -13,6 +13,7 @@ use App\Cabang;
 use App\Motor;
 use App\Pegawai;
 use App\Role;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController1 extends Controller
 {
@@ -179,20 +180,36 @@ class TransaksiController1 extends Controller
         return view('PrintPreviews.SPK',compact('data','montir','pegawai','sparepart','jasa'));
     }
 
-    public function pembayaran($id){
-        $jasa = Jasa::selectRaw(DB::raw('SUM(detil_jasa.jumlah * jasa.harga) as subtotal'))->whereRaw('id_transaksi = ?',[$id]);
-        $sparepart = Sparepart::selectRaw(DB::raw('SUM(detil_sparepart.jumlah * sparepart.harga_jual) as subtotal'))->whereRaw('id_transaksi = ?',[$id]);
-        $tanggal = date('Y-m-d');
-        $total = $jasa->subtotal + $sparepart->subtotal;
+    public function printNota($id)
+    {
+        $data = Transaksi::find($id);
+        $montir = $data->pegawai->where('id_role','MN')->first();
+        $pegawai = $data->pegawai->where('id_role','!=','MN')->first();
+        $sparepart = $data->sparepart;
+        $jasa = $data->jasa;
+        return view('PrintPreviews.NotaLunas',compact('data','montir','pegawai','sparepart','jasa'));
+    }
 
-        return view('Owner.pembayaranDetail',compact('jasa','sparepart','tanggal','total'));
+    public function pembayaran($id){
+        $jasa = DetilJasa::selectRaw(DB::raw('SUM(detil_jasa.jumlah * jasa.harga) as subtotal, jasa.jenis as nama'))->join('jasa','detil_jasa.id_jasa','=','jasa.id')->whereRaw('detil_jasa.id_transaksi = ?',[$id])->get();
+        $sparepart = DetilSparepart::selectRaw(DB::raw('SUM(detil_sparepart.jumlah * sparepart.harga_jual) as subtotal, sparepart.nama as nama, detil_sparepart.jumlah as jumlah'))->join('sparepart','detil_sparepart.id_sparepart','=','sparepart.id')->whereRaw('detil_sparepart.id_transaksi = ?',[$id])->get();
+        $tanggal = date('Y-m-d');
+        $total = 0;
+        for($i = 0; $i < count($jasa); $i++){
+            $total += $jasa[$i]->subtotal;
+        }
+        for($j = 0; $j < count($sparepart); $j++){
+            $total += $sparepart[$j]->subtotal;
+        }
+        return view('Owner.pembayaranDetail',compact('jasa','sparepart','tanggal','total','id'));
     }
 
     public function pelunasan(Request $request, $id){
         $data = Transaksi::find($id);
         $data->isLunas = 1;
+        $data->save();
 
-        return view('Owner.pembayaran');
+        return redirect()->route('owner.transaksi.index');
         
     }
 }

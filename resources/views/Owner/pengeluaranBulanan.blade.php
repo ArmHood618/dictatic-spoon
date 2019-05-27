@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Tahun Laporan yang akan dibuat :</strong>
-                    {!! Form::number('tahun',null,array('placeholder' => 'Tahun','class' => 'form-control', 'id' => 'tanggal','required' => 'required')) !!}
+                    {!! Form::number('tahun',null,array('placeholder' => 'Tahun','class' => 'form-control', 'id' => 'tanggal','required' => 'required', 'id' => 'tahun')) !!}
                 </div>
             </div>
 
@@ -14,7 +14,7 @@
                 <tr>
                     <td>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Graph</button>
+                            <button type="button" onclick="graph()" class="btn btn-primary">Graph</button>
                         </div>
                     </td>
                     <td>
@@ -32,7 +32,15 @@
   </div>
   <script>
   function graph(){
-      tahun = document.getElementById('tanggal');
+    tahun = document.getElementById('tahun').value;
+    url = '{{ URL::to('owner/pengeluaran_bulanan/chart/') }}';
+    var printWindow = window.open(url.concat('/'.concat(tahun)));
+    printWindow.addEventListener('load', function(){
+        setTimeout(function(){
+            printWindow.print();
+            printWindow.close();
+        },300);
+    }, true);
   }
   </script>
 @endsection

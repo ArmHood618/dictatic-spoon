@@ -30,7 +30,7 @@
                 <td><a class="btn btn-secondary" href="{{ route('owner.pegawai.edit', $pegawai->id) }}">Ubah</a>
                 {!! Form::open(['method' => 'DELETE', 'route'
                                 => ['owner.pegawai.destroy', $pegawai->id],'style'=>'display:inline', 'id' => 'deleteForm']) !!}
-                  <button type="button" class="btn btn-danger btn-delete">Hapus</button>
+                  <button type="submit" class="btn btn-danger btn-delete">Hapus</button>
                 {!! Form::close() !!}
                 </td>
             </tr>

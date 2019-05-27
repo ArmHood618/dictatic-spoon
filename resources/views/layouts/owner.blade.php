@@ -106,9 +106,6 @@
           <li>
               <a href="{{ route('owner.pengadaan.index') }}">Pengadaan Sparepart</a>
           </li>
-          <li>
-              <a href="{{ route('owner.pembayaran') }}">Pembayaran</a>
-          </li>
         </ul>
     </li>
     <li>
@@ -127,7 +124,7 @@
                 <a href="{{ route('owner.pengeluaran_bulanan') }}">Pengeluaran Bulanan</a>
             </li>
             <li>
-                <a href="#">Sisa Stok</a>
+                <a href="{{ route('owner.sisa_stok') }}">Sisa Stok</a>
             </li>
             <li>
                 <a href="{{ route('owner.penjualan_jasa') }}">Penjualan Jasa</a>
@@ -160,7 +157,7 @@
 
       <ul class="navbar-nav my-auto ml-auto">
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Cari Transaksi" aria-label="Search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Cari Transaksi" aria-label="Search" id="searchTextBox">
           <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Cari</button>
         </form>
       </ul>

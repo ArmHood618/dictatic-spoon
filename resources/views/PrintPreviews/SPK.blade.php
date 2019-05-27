@@ -20,7 +20,7 @@
 <h3 class="text-center">SPAREPART</h3>
 <hr>
 <hr>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <th class="col" style="width: 20%;">Kode</th>
         <th class="col" style="width: 20%;">Nama</th>

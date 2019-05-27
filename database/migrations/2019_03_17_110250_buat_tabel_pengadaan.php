@@ -17,6 +17,7 @@ class BuatTabelPengadaan extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_supplier');
             $table->date('tanggal');
+            $table->boolean('isConfirmed')->default(0);
             $table->foreign('id_supplier')->references('id')->on('supplier')->onDelete('cascade');
         });
     }

@@ -9,6 +9,8 @@
                     {!! Form::text('nama',$data->nama,array('placeholder' => 'Nama','class' => 'form-control','required' => 'required')) !!}
                     <strong>Alamat :</strong>
                     {!! Form::text('alamat',$data->alamat,array( 'placeholder' => 'Alamat','class' => 'form-control','required' => 'required')) !!}
+                    <strong>Kota :</strong>
+                    {!! Form::text('kota',$data->kota,array('placeholder' => 'Kota','class' => 'form-control', 'id' => 'alamat','required' => 'required')) !!}
                     <strong>Nomor Telepon :</strong>
                     {!! Form::number('no_telp',$data->no_telp,array( 'placeholder' => 'Nomor Telepon','class' => 'form-control','required' => 'required')) !!}
                 </div>

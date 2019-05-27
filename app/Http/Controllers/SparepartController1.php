@@ -19,7 +19,7 @@ class SparepartController1 extends Controller
     public function index()
     {
         if(session()->get('role') == 'OW'){
-            $data = Sparepart::all();
+            $data = Sparepart::sortable()->paginate(10);
 
             return view('Owner.tampilSparepart',compact('data'));
         }else{

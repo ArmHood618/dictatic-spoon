@@ -18,8 +18,7 @@ class PengadaanController1 extends Controller
     public function index()
     {
         $data = Pengadaan::all();
-        
-        return view('Owner.tampilPengadaan', compact('data','supplier'));
+        return view('Owner.tampilPengadaan', compact('data'));
     }
 
     /**
@@ -138,5 +137,26 @@ class PengadaanController1 extends Controller
 
         return redirect()->route('owner.pengadaan.index')->with('success','Item created successfully');
         
+    }
+
+    public function konfirmasi($id){
+        $data = Pengadaan::find($id);
+
+        $data->isConfirmed = 1;
+        $data->save();
+
+        $sparepart = $data->sparepart;
+        foreach($sparepart as $s){
+            $s->stok += $s->pivot->jumlah;
+            $s->save();
+        }
+
+        return redirect()->route('owner.pengadaan.index')->with('success','Stock updated successfully');
+    }
+
+    public function print($id){
+        $data = Pengadaan::find($id);
+
+        return view('PrintPreviews.SuratPemesanan',compact('data'));
     }
 }

@@ -20,8 +20,13 @@
                 <td><a class="btn btn-secondary" href="{{ route('owner.pengadaan.edit', $p->id) }}">Ubah</a>
                 {!! Form::open(['method' => 'Delete','route'
                                 => ['owner.pengadaan.destroy', $p->id],'style'=>'display:inline', 'id' => 'deleteForm']) !!}
-                <button type="button" class="btn btn-danger btn-delete">Hapus</button>
+                <button type="submit" class="btn btn-danger btn-delete">Hapus</button>
                 {!! Form::close() !!}
+                @if($p->isConfirmed == 0)
+                <a class="btn btn-secondary" href="{{ route('owner.pengadaan.konfirmasi', $p->id) }}">Konfirmasi</a>
+                @endif
+                <button type="button" class="btn btn-primary btnprn" onclick="frames['frame{{ $p->id }}'].print()">Cetak</a>
+                <iframe src="{{ route('owner.SPS', $p->id) }}" style="visibility:hidden; height:1px; width:1px;" name="frame{{ $p->id }}"></iframe>
                 </td>
             </tr>
             @endforeach
@@ -38,8 +43,5 @@
     
   </div>
   <script>
-    document.querySelectorAll('.btn-delete').forEach(function(element) {
-      element.onclick = deleteData
-    })
   </script>
 @endsection

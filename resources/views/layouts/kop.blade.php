@@ -26,7 +26,7 @@
 <body>
     <div class="container">
         <div class="clearfix text-center" style="line-height:1;">
-            <img src="/image/imagenotfound.png" class="float-left mr-1" style="width: 13rem;height: 13rem;" alt="/image/imagenotfound.png">
+            <img src="{{ asset('/image/imagenotfound.png') }}" class="float-left mr-1" style="width: 13rem;height: 13rem;" alt="/image/imagenotfound.png">
             <h1>ATMA AUTO</h1>
             <h3>MOTORCYCLE SPAREPARTS AND SERVICES</h3>
             <p class="text-body">Jl. Babarsari No. 43 Yogyakarta 552181</p>

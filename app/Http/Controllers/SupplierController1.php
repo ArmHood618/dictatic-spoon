@@ -41,7 +41,7 @@ class SupplierController1 extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['nama' => 'required', 'alamat' => 'required', 'no_telp' => 'required']);
+        $this->validate($request, ['nama' => 'required', 'alamat' => 'required', 'no_telp' => 'required', 'kota' => 'required']);
         Supplier::create($request->all());
         return redirect()->route('owner.supplier.index')->with('success','Item created successfully');
     }

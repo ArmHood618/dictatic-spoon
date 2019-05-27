@@ -29,7 +29,7 @@
                     </td>
                     <td>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="button" onclick="submitForm()" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </td>
             </table>
@@ -47,7 +47,7 @@
         arrHeadSparepart = ['', 'Nama', 'Harga', 'Jumlah'];
 
         @foreach($semua_sparepart as $data)
-            var obj = {nama:'{{ $data->nama }}', id:{{ $data->id }}, harga:{{ $data->harga_jual }}};
+            var obj = {nama:'{{ $data->nama }}', id:'{{ $data->id }}', harga:'{{ $data->harga_jual }}'};
             arrSparepart.push(obj);
         @endforeach
 
@@ -155,6 +155,6 @@
                 event.preventDefault();
                 alert('Harus ada pemesanan sparepart');
             }
-        }
+        })
     </script>
 @endsection

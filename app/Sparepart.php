@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Sparepart extends Model
 {
+    use Sortable;
     protected $table = 'sparepart';
     protected $primaryKey = 'id';
     public $timestamps = false;
@@ -17,6 +19,14 @@ class Sparepart extends Model
                         'stok_min',
                         'harga_beli',
                         'harga_jual'];
+    public $sortable = ['id_letak',
+    'id_ruang',
+    'nama',
+    'tipe',
+    'stok',
+    'stok_min',
+    'harga_beli',
+    'harga_jual'];
 
     public function letak(){
         return $this->belongsTo('App\Letak','id_letak');

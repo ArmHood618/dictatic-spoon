@@ -1,7 +1,7 @@
 @extends('layouts.owner')
 @section('content')
 <!-- Form - Start -->
-{{ Form::open(array('route' => 'owner.pendapatan_bulanan.create', 'method'=>'POST')) }}
+{{ Form::open(array('route' => 'owner.pendapatan_tahunan.create', 'method'=>'POST')) }}
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -9,7 +9,12 @@
                     {!! Form::number('tahun',null,array('placeholder' => 'Tahun','class' => 'form-control','required' => 'required', 'id' => 'tahun')) !!}
                 </div>
             </div>
-
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Sparepart Laporan yang akan dibuat :</strong>
+                    {!! Form::select('sparepart',$sparepart,null,array('id' => 'sparepart','class' => 'form-control')) !!}
+                </div>
+            </div>
             <table class="ml-auto">
                 <tr>
                     <td>

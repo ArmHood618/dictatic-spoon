@@ -11,7 +11,8 @@ class Supplier extends Model
     public $timestamps = false;
     protected $fillable = ['nama',
                         'alamat',
-                        'no_telp'];
+                        'no_telp',
+                        'kota'];
 
     public function sales(){
         return $this->hasMany('App\Sales','id_supplier');

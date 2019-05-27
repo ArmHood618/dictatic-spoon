@@ -1,8 +1,9 @@
 @extends('layouts.owner')
 @section('content')
 <!-- Table - Start -->
-<table class="table table-bordered" style="width: 100%;">
-      @if(count($data))
+    <h4>Sparepart</h4>
+    <table class="table table-bordered" style="width: 100%;">
+      @if(count($sparepart))
           <thead class="thead-dark text-center">
             <tr>
                 <td class="col" style="width: 30%;">Item</td>
@@ -11,27 +12,48 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($data as $item)
+            @foreach($sparepart as $item)
             <tr>
                 <td>{{ $item->nama }}</td>
                 <td>{{ $item->jumlah }}</td>
                 <td>{{ $item->subtotal }}</td>
             </tr>
             @endforeach
-            <tr>
-                <td style="width:70%">Total</td>
-                <td style="width:30%">{{ $item->total }}</td>
-            </tr>
       @else
             <tr>
-                <td>Not Found !!!</td>
+                <td>Tidak Ada !!!</td>
             </tr>
-            @endif
+      @endif
           </tbody>
       </table>
       <!-- Table - End -->
+      <h4>Jasa</h4>
+    <table class="table table-bordered" style="width: 100%;">
+      @if(count($jasa))
+          <thead class="thead-dark text-center">
+            <tr>
+                <td class="col" style="width: 30%;">Item</td>
+                <td class="col" style="width: 30%;">Subtotal</td>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($jasa as $item)
+            <tr>
+                <td>{{ $item->nama }}</td>
+                <td>{{ $item->subtotal }}</td>
+            </tr>
+            @endforeach
+      @else
+            <tr>
+                <td>Tidak Ada !!!</td>
+            </tr>
+      @endif
+          </tbody>
+      </table>
+      <!-- Table - End -->
+      <h4 class="text-right">Total : {{ $total }}</h4>
       <!-- Form - Start -->
-      {{ Form::open(array('route' => '???', 'method'=>'POST', 'id' => 'formid')) }}
+      {{ Form::open(array('route' => ['owner.transaksi.lunas',$id], 'method'=>'POST', 'id' => 'formid')) }}
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -63,14 +85,15 @@
     'use strict'
 
     document.querySelector('#formid').addEventListener('submit', function (event) {
-        let form = event.target
-        var errors = 0
-
-        if(document.getElementById('pembayaran') < {{ $total }}){
-            event.preventDefault()
-            alert('Peringatan: Biaya kurang')
-        } else {
-
+        let form = event.target;
+        var errors = 0;
+        var total = {{ $total }};
+        if(document.getElementById('pembayaran').value < total){
+            event.preventDefault();
+            alert('Peringatan: Biaya kurang');
+        }else if(document.getElementById('pembayaran').value > total){
+            var kembali = document.getElementById('pembayaran').value - total;
+            alert('Kembalian : Rp. '+kembali);
         }
     })
   </script>

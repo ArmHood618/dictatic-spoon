@@ -6,19 +6,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                 <strong>Nama Sparepart :</strong>
-                    {!! Form::text('nama',$data->nama,array('placeholder' => 'Nama Sparepart','class' => 'form-control', 'id' => 'nama')) !!}
+                    {!! Form::text('nama',null,array('placeholder' => 'Nama Sparepart','class' => 'form-control', 'id' => 'nama')) !!}
                     <strong>Tipe :</strong>
-                    {!! Form::text('tipe',$data->tipe,array('placeholder' => 'Tipe Sparepart','class' => 'form-control', 'id' => 'tipe')) !!}
+                    {!! Form::text('tipe',null,array('placeholder' => 'Tipe Sparepart','class' => 'form-control', 'id' => 'tipe')) !!}
                     <strong>Letak :</strong>
-                    {!! Form::select('id_letak',$letak,$data->id_letak,array('class' => 'form-control')) !!}
+                    {!! Form::select('id_letak',$letak,null,array('class' => 'form-control')) !!}
                     <strong>Ruang :</strong>
-                    {!! Form::select('id_ruang',$ruang,$data->id_ruang,array('class' => 'form-control')) !!}
+                    {!! Form::select('id_ruang',$ruang,null,array('class' => 'form-control')) !!}
                     <strong>Stok Minimal :</strong>
-                    {!! Form::number('stok_min',$data->stok_min,array('placeholder' => 'Stok Minimal','class' => 'form-control', 'id' => 'stok_min')) !!}
+                    {!! Form::number('stok_min',null,array('placeholder' => 'Stok Minimal','class' => 'form-control', 'id' => 'stok_min')) !!}
                     <strong>Harga Beli :</strong>
-                    {!! Form::number('harga_beli',$data->harga_beli,array('placeholder' => 'Harga Beli','class' => 'form-control', 'id' => 'harga_beli')) !!}
+                    {!! Form::number('harga_beli',null,array('placeholder' => 'Harga Beli','class' => 'form-control', 'id' => 'harga_beli')) !!}
                     <strong>Harga Jual :</strong>
-                    {!! Form::number('harga_jual',$data->harga_jual,array('placeholder' => 'Harga Jual','class' => 'form-control', 'id' => 'harga_jual')) !!}
+                    {!! Form::number('harga_jual',null,array('placeholder' => 'Harga Jual','class' => 'form-control', 'id' => 'harga_jual')) !!}
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-6">

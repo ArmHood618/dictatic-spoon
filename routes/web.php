@@ -68,6 +68,12 @@ Route::prefix('owner')->group(function () {
     Route::resource('transaksi_pegawai', 'TransaksiPegawaiController1',['as' => 'owner']);
     Route::resource('detil_pengadaan', 'DetilPengadaanController1',['as' => 'owner']);
     Route::get('/SPK/{id}', 'TransaksiController1@print')->name('owner.SPK');
+    Route::get('/SPS/{id}', 'PengadaanController1@print')->name('owner.SPS');
+    Route::get('/Nota/{id}', 'TransaksiController1@printNota')->name('owner.Nota');
+    //
+    Route::get('pengadaan/konfirmasi/{id}', 'PengadaanController1@konfirmasi')->name('owner.pengadaan.konfirmasi');
+    Route::get('transaksi/bayar/{id}', 'TransaksiController1@pembayaran')->name('owner.transaksi.bayar');
+    Route::post('transaksi/lunas/{id}', 'TransaksiController1@pelunasan')->name('owner.transaksi.lunas');
     //
     Route::get('/pendapatan_bulanan', function(){
         return view('Owner.pendapatanBulanan');
@@ -97,6 +103,11 @@ Route::prefix('owner')->group(function () {
     })->name('owner.sparepart_terlaris');
     Route::post('/sparepart_terlaris', 'LaporanController@sparepartTerlaris')->name('owner.sparepart_terlaris.create');
     Route::get('/sparepart_terlaris/chart/{tahun}', 'ChartController@sparepartTerlaris')->name('owner.sparepart_terlaris.graph');
+    //
+    //
+    Route::get('/sisa_stok', 'LaporanController@sisaStokInput')->name('owner.sisa_stok');
+    Route::post('/sisa_stok', 'LaporanController@sparepartTerlaris')->name('owner.sisa_stok.create');
+    Route::post('/sisa_stok/chart/', 'ChartController@sparepartTerlaris')->name('owner.sisa_stok.graph');
     //
     Route::get('/pembayaran', function(){
         return view('Owner.pembayaran');
