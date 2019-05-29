@@ -53,8 +53,6 @@
         var arrHeadMotor = new Array();
         var arrMotor = new Array();
         var arrMotorSparepart = new Array();
-        var arrToDelete = new Array();
-        var arrToAdd = new Array();
         arrHeadMotor = ['','Tipe'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
 
         @if($motorAll)

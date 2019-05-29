@@ -34,11 +34,11 @@
                 </div>
                 <div class="form-group">
                     <label>Password Pegawai:</label>
-                    {!! Form::password('password',array('placeholder' => 'Password Pegawai','class' => 'form-control', 'id' => 'password','required' => 'required', 'pattern' => '(?=.*\d)(?=.*[a-z])(?=.*[()\[\]{}?!$%&/=*+~,.;:<>_-])(?=.*[A-Z]).{9,}')) !!}
+                    {!! Form::password('password',array('placeholder' => 'Password Pegawai','class' => 'form-control', 'id' => 'password','required' => 'required')) !!}
                 </div>
                 <div class="form-group">
                     <label>Ulangi Password Pegawai:</label>
-                    {!! Form::password('password',array('placeholder' => 'Ulangi Password Pegawai','class' => 'form-control', 'id' => 'password_confirmation','required' => 'required', 'pattern' => '(?=.*\d)(?=.*[a-z])(?=.*[()\[\]{}?!$%&/=*+~,.;:<>_-])(?=.*[A-Z]).{9,}')) !!}
+                    {!! Form::password('password',array('placeholder' => 'Ulangi Password Pegawai','class' => 'form-control', 'id' => 'password_confirmation','required' => 'required')) !!}
                 </div>
             </div>
 

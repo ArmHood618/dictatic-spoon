@@ -1,4 +1,4 @@
-@extends('layouts.owner')
+@extends('layouts.pegawai')
 @section('content')
   <!-- Form - Start -->
   {{ Form::open(array('route' => ['owner.transaksi.update',$data->id], 'method'=>'POST', 'id' => 'form')) }}

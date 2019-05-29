@@ -74,10 +74,7 @@
       <a href="#transaksiSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-cash-register"></i><span> Transaksi</span></a>
         <ul class="collapse list-unstyled" id="transaksiSubmenu">
           <li>
-              <a href="{{ route('owner.transaksi.create') }}">Transaksi</a>
-          </li>
-          <li>
-              <a href="{{ route('owner.transaksi.index') }}">Pembayaran</a>
+              <a href="{{ route('owner.transaksi.index') }}">Transaksi</a>
           </li>
         </ul>
     </li>

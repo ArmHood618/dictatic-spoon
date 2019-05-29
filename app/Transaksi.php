@@ -29,11 +29,11 @@ class Transaksi extends Model
     }
 
     public function sparepart(){
-        return $this->belongsToMany('App\Sparepart','detil_sparepart','id_transaksi','id_sparepart')->withPivot('jumlah');
+        return $this->belongsToMany('App\Sparepart','detil_sparepart','id_transaksi','id_sparepart')->withPivot('jumlah','id');
     }
 
     public function jasa(){
-        return $this->belongsToMany('App\Jasa','detil_jasa','id_transaksi','id_jasa')->withPivot('jumlah');
+        return $this->belongsToMany('App\Jasa','detil_jasa','id_transaksi','id_jasa')->withPivot('jumlah','id');
     }
 
     public function pegawai(){

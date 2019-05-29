@@ -38,6 +38,8 @@ Route::get('rute', function() {
     echo "</table>";
 });
 
+
+
 Route::get('/login', function () {
     return view('login');
 })->name('login.view');
@@ -62,7 +64,6 @@ Route::prefix('owner')->group(function () {
     Route::resource('pengadaan', 'PengadaanController1',['as' => 'owner']);
     Route::resource('sisa_stok', 'SisaStokController1',['as' => 'owner']);
     Route::resource('motor_sparepart', 'MotorSparepartController1',['as' => 'owner']);
-    Route::resource('transaksi', 'TransaksiController1',['as' => 'owner']);
     Route::resource('detil_sparepart', 'DetilSparepartController1',['as' => 'owner']);
     Route::resource('detil_jasa', 'DetilJasaController1',['as' => 'owner']);
     Route::resource('transaksi_pegawai', 'TransaksiPegawaiController1',['as' => 'owner']);
@@ -114,13 +115,15 @@ Route::prefix('owner')->group(function () {
     })->name('owner.pembayaran');
     
 });
-
+Route::resource('transaksi', 'TransaksiController1',['as' => 'owner']);
 Route::prefix('pegawai')->group(function(){
     Route::get('/', function(){
         return view('Pegawai.welcome');
     })->name('pegawai.index');
+    
+    Route::get('/detail_transaksi/{id}','TransaksiController1@detailTransaksi')->name('detail_transaksi');
 });
-
+Route::post('/cari','CariController@cariTransaksi')->name('cari');
 Route::prefix('cs')->group(function(){});
 Route::get('/test', function(){
     return view('PrintPreviews.SPK');

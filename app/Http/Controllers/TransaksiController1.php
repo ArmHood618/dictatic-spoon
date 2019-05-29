@@ -29,8 +29,13 @@ class TransaksiController1 extends Controller
             $transaksi_pegawai= TransaksiPegawai::all();    
             $montir = Pegawai::where('role','MN');
             return view('Owner.tampilTransaksi',compact('data','transaksi_pegawai','montir'));
+        }else if(session()->get('role') == 'CS' || session()->get('role') == 'KS'){
+            $data = Transaksi::all();
+            $transaksi_pegawai= TransaksiPegawai::all();    
+            $montir = Pegawai::where('role','MN');
+            return view('Pegawai.tampilTransaksi',compact('data','transaksi_pegawai','montir'));
         }else{
-            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pemilik']);
+            return redirect()->route('home')->with(['alert' => 'Halaman Hanya Bisa diakses oleh pegawai']);
         }
     }
 
@@ -48,8 +53,11 @@ class TransaksiController1 extends Controller
         $semua_jasa = Jasa::all();
         $semua_sparepart = Sparepart::all();
         $montir = Pegawai::where('id_role','MN')->pluck('nama','id');
-
-        return view('Owner.tambahTransaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart','montir'));
+        if(session()->get('role') == 'OW'){
+            return view('Owner.tambahTransaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart','montir'));
+        }else if(session()->get('role') == 'CS' || session()->get('role') == 'KS'){
+            return view('Pegawai.tambahTransaksi',compact('cabang','jasa','sparepart','motor','semua_jasa','semua_sparepart','montir'));
+        }
     }
 
     /**
@@ -109,6 +117,7 @@ class TransaksiController1 extends Controller
         $transaksi_pegawai2->id_transaksi = $transaksi->id;
         $transaksi_pegawai2->save();
             
+        
         return redirect()->route('owner.transaksi.index')->with('success','Item created successfully');
     }
 
@@ -155,7 +164,63 @@ class TransaksiController1 extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!empty($request->delete_id_sparepart)){
+            foreach($request->delete_id_sparepart as $id_sparepart){
+                DetilSparepart::find($id_sparepart)->delete();
+            }
+        }
+
+        if(!empty($request->delete_id_jasa)){
+            foreach($request->delete_id_jasa as $id_jasa){
+                DetilJasa::find($id_jasa)->delete();
+            }
+        }
+
+        $data = Transaksi::find($id);
+        $data ->id_cabang = $request->id_cabang;
+        $data ->id_motor = $request->id_motor;
+        $data ->nama = $request->nama;
+        $data ->no_plat = $request->no_plat;
+        $data ->no_telp = $request->no_telp;
+        $data ->tanggal = $request->tanggal;
+        if(!empty($request->add_id_jasa) && !empty($data->jasa)){
+            $data ->jenis_transaksi = 'SV';
+            if(!empty($request->add_id_sparepart) && !empty($data->sparepart)){
+                $data ->jenis_transaksi = 'SS';
+            }
+        }else{
+            $data ->jenis_transaksi = 'SP';
+        }
+        $data->save();
+
+        if(!empty($request->add_id_jasa)){
+            for($i=0;$i<count($request->add_id_jasa);$i++){
+                $detil_jasa = new DetilJasa;
+                $detil_jasa->id_jasa = $request->add_id_jasa[$i];
+                $detil_jasa->jumlah = $request->jumlah_jasa[$i];
+                $detil_jasa->id_transaksi = $data->id;
+                $detil_jasa->save();
+            }
+        }
+
+        if(!empty($request->add_id_sparepart)){
+            for($i=0;$i<count($request->add_id_sparepart);$i++){
+                $detil_sparepart = new DetilSparepart;
+                $detil_sparepart->id_sparepart = $request->add_id_sparepart[$i];
+                $detil_sparepart->jumlah = $request->jumlah_sparepart[$i];
+                $detil_sparepart->id_transaksi = $data->id;
+                $detil_sparepart->save();
+            }
+        }
+
         
+
+        $transaksi_pegawai1 = new TransaksiPegawai;
+        $transaksi_pegawai1->id_pegawai = $request->id_pegawai;
+        $transaksi_pegawai1->id_transaksi = $transaksi->id;
+        $transaksi_pegawai1->save();
+
+        return redirect()->route('owner.transaksi.index')->with('success','Item created successfully');
     }
 
     /**
@@ -201,7 +266,13 @@ class TransaksiController1 extends Controller
         for($j = 0; $j < count($sparepart); $j++){
             $total += $sparepart[$j]->subtotal;
         }
-        return view('Owner.pembayaranDetail',compact('jasa','sparepart','tanggal','total','id'));
+        
+        if(session()->get('role') == 'OW'){
+            return view('Owner.pembayaranDetail',compact('jasa','sparepart','tanggal','total','id'));
+        }else if(session()->get('role') == 'CS' || session()->get('role') == 'KS'){
+            return view('Pegawai.pembayaranDetail',compact('jasa','sparepart','tanggal','total','id'));
+        }
+        
     }
 
     public function pelunasan(Request $request, $id){
@@ -211,5 +282,14 @@ class TransaksiController1 extends Controller
 
         return redirect()->route('owner.transaksi.index');
         
+    }
+
+    public function detailTransaksi($id){
+        $data = Transaksi::find($id);
+        $montir = $data->pegawai->where('id_role','MN');
+        $detil_jasa = $data->jasa;
+        $detil_sparepart = $data->sparepart;
+
+        return view('detailTransaksi',compact('data','montir','detil_jasa','detil_sparepart'));
     }
 }
